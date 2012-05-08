@@ -12,15 +12,16 @@ $res		=		mysql_query($sql);
 <title>Untitled Document</title>
 <script>
 $(document).ready(function() {
-	$("input[type=text]").change(function() {
-		code	=	$(this).val();
+	$("input[type=button]").click(function() {
+		user	=	$("select").val();
+		code	=	$("input[type=text]").val();
 		id		=	$(".users").val();
 		$.ajax({
-			data: "id="+id+"&code="+code,
+			data: "id="+id+"&code="+code+"&user="+user,
 			url : "getEmail.php",
 			type: "POST",
 			success: function(resp) {
-				alert(resp);
+				$(".msg").html(resp);
 			}
 		})
 	})
@@ -47,7 +48,12 @@ $(document).ready(function() {
 	<td>Coupon Code</td>
     <td><input type="text" name="code" />
 </tr>
+<tr>
+<td></td>
+<td><input type="button" value="Redeem" /></td>
+</tr>
 </table>
+<div class="msg"></div>
 </div>
 </body>
 </html>
