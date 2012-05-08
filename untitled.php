@@ -65,7 +65,14 @@ $listCount++;
 List <?php echo $listCount ?>
 <ul>
 <?php foreach($list as $item){ ?>
-	<li>  <?php echo $item['name'] ?> <input name="users[<?php echo $item['id'] ?>]" type="text" /> </li>
+	<li>  <?php echo $item['name'] ?> 
+      <p>
+          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="1" />
+          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="2" />
+          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="3" />
+          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="4" />
+          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="5" />
+      </p>
     <input type="hidden" value="<?php echo $listCount ?>" name="list" />
 <?php } ?>
 <li>  <input name="submit" type="submit" /> </li>
