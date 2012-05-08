@@ -51,34 +51,113 @@ $usersRand = $_SESSION['randomUsers'] ;
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
+<link href="lib/jrating_v2.2/jquery/jRating.jquery.css" type="text/css" />
+<link href="lib/jrating_v2.2/jquery/jNotify.jquery.css" type="text/css" />
 </head>
 
 <body>
+<style type="text/css">
+/*********************/
+/** jRating CSS **/
+/*********************/
 
+/**Div containing the color of the stars */
+.jRatingAverage {
+	background-color:#f62929;
+	position:relative;
+	top:0;
+	left:0;
+	z-index:2;
+	height:100%;
+}
+.jRatingColor {
+	background-color:#f4c239; /* bgcolor of the stars*/
+	position:relative;
+	top:0;
+	left:0;
+	z-index:2;
+	height:100%;
+}
+
+/** Div containing the stars **/
+.jStar {
+	position:relative;
+	left:0;
+	z-index:3;
+}
+
+/** P containing the rate informations **/
+p.jRatingInfos {
+	position:		absolute;
+	z-index:9999;
+	background:	transparent url('icons/bg_jRatingInfos.png') no-repeat;
+	color:			#FFF;
+	display:		none;
+	width:			91px;
+	height:			29px;	
+	font-size:16px;
+	text-align:center;
+	padding-top:5px;
+}
+	p.jRatingInfos span.maxRate {
+		color:#c9c9c9;
+		font-size:14px;
+	}
+	ul.roundabout-wrapper {
+				list-style: none;
+				padding: 0;
+				margin: 0 auto;
+				width: 42em;
+				height: 24em;
+			}
+			ul.roundabout-wrapper>li {
+				height: 20em;
+				width: 30em;
+				background-color: #ccc;
+				text-align: center;
+				cursor: pointer;
+			}
+				ul.roundabout-wrapper>li.roundabout-in-focus {
+					cursor: default;
+				}
+			ul.roundabout-wrapper span {
+				display: block;
+				padding-top: 6em;
+			}
+</style>
+<ul class="roundabout-wrapper">
 <?php 
 $listCount = 0;
 
 foreach($usersRand as $list){ 
 $listCount++;
 ?>
+<li>
 <form method="post">
 List <?php echo $listCount ?>
 <ul>
 <?php foreach($list as $item){ ?>
 	<li>  <?php echo $item['name'] ?> 
-      <p>
-          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="1" />
-          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="2" />
-          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="3" />
-          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="4" />
-          <input type="radio" name="users[<?php echo $item['id'] ?>]" value="5" />
-      </p>
+    <div class="rating-box" id="rating-<?php echo $item['name'] ?>">  </div>
+	<input type="hidden" name="users[<?php echo $item['id'] ?>]" value="" />
     <input type="hidden" value="<?php echo $listCount ?>" name="list" />
 <?php } ?>
 <li>  <input name="submit" type="submit" /> </li>
 </ul>
 </form>
+</li>
 <?php } ?>
+</ul>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="lib/jrating_v2.2/jquery/jRating.jquery.js"></script>
+<script type="text/javascript" src="lib/jrating_v2.2/jquery/jNotify.jquery.js"></script>
+<script type="text/javascript" src="lib/roundabout/jquery.roundabout.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".rating-box").jRating();
+	$('ul.roundabout-wrapper').roundabout();
+});
+</script>
 </body>
 </html>
 
